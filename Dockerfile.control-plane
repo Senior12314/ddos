@@ -1,0 +1,41 @@
+# Build stage
+FROM golang:1.21-alpine AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apk add --no-cache git
+
+# Copy go mod files
+COPY go.mod ./
+
+# Clean module cache and download dependencies
+RUN go clean -modcache
+RUN go mod download
+RUN go mod tidy
+
+# Copy source code
+COPY . .
+
+# Build the application (this will use the generated go.sum)
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o control-plane ./cmd/control-plane
+
+# Final stage
+FROM alpine:latest
+
+# Install runtime dependencies
+RUN apk --no-cache add ca-certificates tzdata wget
+
+WORKDIR /root/
+
+# Copy the binary from builder stage
+COPY --from=builder /app/control-plane .
+
+# Copy configuration
+COPY --from=builder /app/config.yaml .
+
+# Expose port
+EXPOSE 8080
+
+# Run the application
+CMD ["./control-plane", "-config", "config.yaml"]

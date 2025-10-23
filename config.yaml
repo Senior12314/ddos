@@ -1,0 +1,69 @@
+# CloudNordSP Control Plane Configuration
+
+debug: false
+
+api:
+  address: ":8080"
+  read_timeout: 30s
+  write_timeout: 30s
+  idle_timeout: 120s
+  max_header_bytes: 1048576  # 1MB
+  enable_cors: true
+  enable_metrics: true
+  rate_limit_rps: 100
+  rate_limit_burst: 200
+
+database:
+  type: postgres
+  host: localhost
+  port: 5432
+  database: cloudnordsp
+  username: cloudnordsp
+  password: changeme
+  ssl_mode: disable
+  max_open_conns: 25
+  max_idle_conns: 5
+  max_lifetime: 5m
+
+node:
+  update_interval: 30s
+  health_check_interval: 10s
+  max_nodes: 100
+  node_timeout: 30s
+  retry_attempts: 3
+  retry_delay: 5s
+
+proxy:
+  enable_tcp_proxy: true
+  enable_udp_proxy: true
+  tcp_timeout: 30s
+  udp_timeout: 10s
+  max_connections: 10000
+  buffer_size: 4096
+  enable_af_xdp: true
+  xdp_interface: eth0
+  xdp_queue_id: 0
+
+monitoring:
+  enable_prometheus: true
+  metrics_path: /metrics
+  enable_logging: true
+  log_level: info
+  log_format: json
+  enable_tracing: false
+  trace_endpoint: ""
+  sample_rate: 0.1
+
+security:
+  enable_tls: false
+  tls_cert_file: ""
+  tls_key_file: ""
+  enable_jwt: true
+  jwt_secret: "your-secret-key-change-this-in-production"
+  jwt_expiry: 24h
+  enable_rbac: true
+  enable_rate_limit: true
+  rate_limit_rps: 100
+  rate_limit_burst: 200
+  enable_ip_whitelist: false
+  allowed_ips: []
