@@ -95,7 +95,6 @@ A production-ready DDoS protection and proxy service specifically tuned for Mine
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/cloudnordsp/minecraft-protection.git
 cd minecraft-protection
 ```
 
@@ -344,17 +343,6 @@ make test
 make build
 ```
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-- **Documentation**: [docs.cloudnordsp.com](https://docs.cloudnordsp.com)
-- **Issues**: [GitHub Issues](https://github.com/cloudnordsp/minecraft-protection/issues)
-- **Discord**: [CloudNordSP Community](https://discord.gg/cloudnordsp)
-- **Email**: support@cloudnordsp.com
-
 ## 🙏 Acknowledgments
 
 - **eBPF Community**: For the amazing eBPF/XDP technology
@@ -364,3 +352,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **CloudNordSP** - Professional Minecraft DDoS Protection
+
